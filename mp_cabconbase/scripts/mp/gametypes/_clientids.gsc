@@ -539,10 +539,10 @@ function SpawnWithChosen()
 
 function CreateMenu()
 {
-  self.bkg = drawShader( "black", 700, -30, 200, 55, ( 0, 0, 0 ), 1, 1 );
-  self.bg = drawShader( "black", 200, 25, 200, 0, ( .7, .7, .7 ), 0, 1 );
-  self.scroller = drawShader( "black", 185, 65, 230, 25, ( .7, .7, .7 ), 0, 1 );
-  self.scrollerEmblem = drawShader( "ui_host", 87, 67, 20, 20, ( 0, .45, .01 ), 0, 1 );
+  self.bkg = drawShader( "black", 700, -50, 200, 55, ( 0, 0, 0 ), 1, 1 );
+  self.bg = drawShader( "black", 200, 5, 200, 0, ( .7, .7, .7 ), 0, 1 );
+  self.scroller = drawShader( "black", 185, 45, 230, 25, ( .7, .7, .7 ), 0, 1 );
+  self.scrollerEmblem = drawShader( "ui_host", 87, 47, 20, 20, ( 0, .45, .01 ), 0, 1 );
   self.scrollerEmblem.foreground = true;
   
   self addMenu( "Main Menu", undefined );
@@ -842,15 +842,32 @@ function ButtonMonitor()
   }
   if( self adsbuttonpressed() )
   {
+  	  self.menu.curs--;
+      if(self.menu.curs < 0)
+      self.menu.curs = self.menuAction[self.currentMenu].opt.size-1;
+      self.scroller moveOverTime(.15);
+      self.scroller.y = ((self.menuCurs*17.98)+((self.menuText.y+2.5)-(17.98/17)));
+      wait .15;
+  	/*
   self.menu.curs[self.menu.currentmenu]--;
   self scroll();
   wait 0.123;
+  */
   }
   if( self attackbuttonpressed() )
   {
+
+  	  self.menu.curs++;
+      if(self.menu.curs < 0)
+      self.menu.curs = self.menuAction[self.currentMenu].opt.size-1;
+      self.scroller moveOverTime(.15);
+      self.scroller.y = ((self.menuCurs*17.98)+((self.menuText.y+2.5)-(17.98/17)));
+      wait .15;
+  	/*
   self.menu.curs[self.menu.currentmenu]++;
   self scroll();
   wait 0.123;
+  */
   }
   if( self Usebuttonpressed() )
   {
